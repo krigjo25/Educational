@@ -1,0 +1,8 @@
+*.env
+.vscode
+test.py
+Botdeas.md
+
+env
+__pycache__
+inactive
