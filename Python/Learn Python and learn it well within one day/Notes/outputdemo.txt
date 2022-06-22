@@ -1,0 +1,78 @@
+This file 
+is an exam
+ple of how
+ python ca
+n read ext
+ernal file
+s.
+Learn P
+yhton in o
+ne day and
+ learn it 
+well.
+Pyth
+on for beg
+inners wit
+h hand-on 
+projects.
+
+This is an
+ appended 
+sentence
+ 
+Pyhton are
+ fun !
+Thi
+s is an ap
+pended sen
+tence
+ Pyh
+ton are fu
+n !
+This i
+s an appen
+ded senten
+ce
+ Pyhton
+ are fun !
+
+This is a
+n appended
+ sentence
+
+ Pyhton ar
+e fun !
+Th
+is is an a
+ppended se
+ntence
+ Py
+hton are f
+un !
+This 
+is an appe
+nded sente
+nce
+ Pyhto
+n are fun 
+!
+This is 
+an appende
+d sentence
+
+ Pyhton a
+re fun !
+T
+his is an 
+appended s
+entence
+ P
+yhton are 
+fun !
+This
+ is an app
+ended sent
+ence
+ Pyht
+on are fun
+ !

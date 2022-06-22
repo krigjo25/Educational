@@ -1,0 +1,2 @@
+TIP :
+ Under importing a file, Folders can not not be CamelCase
