@@ -1,39 +1,52 @@
-class ProStaff:
-    # Instializer
-    '''             Instance variables
-                        pName, 
-                        pPos, 
-                        pSalary
+#   Initiating object 'BinaryGame'
+class BinaryGame(Game):
 
-                    Method / function            
-                        __init__,
-                        __str__,
-                    calculateSalary                    
-                                            '''
-    def __init__(self, pName,pPos, pSalary):
+    #   Initializing the Initializer
+    def __init__(self):
+        return
 
-        self.pos = pPos
-        self.name = pName
-        self.salary = pSalary
+    #   Generate questions method
+    def GenerateQuestion():
 
-        print('Prostaff employe Created')
+        ''' 
+                GenerateQuestions()
+            an Instance method to generates binary questions.
 
-        # Readable string
-    def __str__(self):
-        return 'Name = %s,\nPosition = %s\n Salary = %s\n' % (self.name, self.pos, self.salary)
+        '''
 
-    
-    def calculateSalary(self):
-        prmpt = '\nEnter number of hours worked for %s:' %(self.name)
-        prompt = '\nEnter the hourly rate for %s:' %(self.name)
+        #   Importing randint function
+        from random import randint
 
-        hours, rate = input(prmpt), input(prompt)
-        self.salary = int(hours)*int(rate)
-        
-        return self.salary
+        #   Initializing a local variable called 'Score'
+        Score   = 0
 
+        #   Looping through using for loop to evaluate the answer
+        for i in range(self._NOQ):
 
-'''
-Calling the Class
-'''   
+            #   Initializing a variable and choosing a random integer from 1-100
+            x = randint(1,100)
 
+            #   Prompt the user to type in an integer
+            prmpt = input()
+
+        #   Creating a while loop to loop through a true statement
+        while True:
+
+            #   Creating a try, except loop
+            try:
+                # Converting the string into an integer base 2
+                prmpt = int(prmpt, base=2)
+
+                #   Updating the user Score
+                Score += 1
+
+                #   Breaking out from the while loop
+                break
+
+            except:
+
+                #   Print out an error message
+                print('')
+
+                #   Prompting the user to answer again
+BinaryGame.GenerateQuestion()
