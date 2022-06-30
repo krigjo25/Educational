@@ -1,17 +1,3 @@
-# 1  Assign the number 11 to a variable called myFavorNumber.
-favNum = 2
-
-print ("Question 1 : \n my favorite number is ", favNum)
-
-# 2 Assign the string ' Hello Python !' to a variable called myFavWord.
-myFavWord = "Hello Python !"
-
-print (" Question 2 : \n my favorite word is", myFavWord)
-
-# 3 Assign Lee to a variable called userName and use the print() to print the value of the userName
-userName = "Lee"
-
-print("Question 3.1 : \nThe userName is :", userName)
 
 userName = "James"
 print ("Question 3.2 : \n We changed the username to : ", userName)
