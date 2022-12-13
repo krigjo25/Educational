@@ -34,6 +34,7 @@ class ProStaff:
     #   Overriding the __add__ method #10.4
     def __add__(self, other):
         return self.salary + other.salary
+
     # 9.4  Using property decorator
     @property
 
@@ -67,14 +68,11 @@ class ProStaff:
         msg1 = f'\nEnter the h/rate for {self.name}'
 
         #   Declear inputs
-        h = input(msg)
-        hr = input(msg1)
+        h = int(input(msg))
+        rate = int(input(msg1))
 
-        #   Converting from string into integer
-        h = int(h)
-        hr = int(hr)
 
-        self.salary = h*hr
+        self.salary = h * rate
 
         return self.salary
 
