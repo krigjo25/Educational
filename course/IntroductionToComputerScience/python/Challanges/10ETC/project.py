@@ -1,11 +1,9 @@
 #   Import
 import sys
 import requests as r
-#   Importing responsories
-import socket as s
 
+#   Importing responsories
 from pythonping import ping
-from http.client import HTTPConnection
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
 class CommandlineInterface():
@@ -17,7 +15,7 @@ class CommandlineInterface():
     def CommandLineOptions(self):
 
         '''Constructing the argparser'''
-        parser  = ArgumentParser(prog = 'SiteConnectivity Checker', formatter_class= ArgumentDefaultsHelpFormatter, description= 'Site Connectivity Checker', epilog= 'Developed by @krigjo25')
+        parser  = ArgumentParser(prog = 'Site Connectivity Checker', formatter_class= ArgumentDefaultsHelpFormatter, description= 'Site Connectivity Checker', epilog= 'by @krigjo25')
 
         #   Initializing command line arguments
         parser.add_argument('-inf', '--inputfile', dest = 'inf', help =' Enter the path to the file', action = 'append')
@@ -47,12 +45,13 @@ class SCChecker():
             #   Program name, version, description
 
         '''
-        name = 'SiteConnectivity Checker'
+
+        name = '%(prog)s'
         version = '0.0.1'
-        by = '@krigjo25'
+
 
         description = '''Checking connection for websites'''
-        return sys.exit(f'Program name : {name}\n\nDescription : {description}Version : {version}\nDeveloped By: {by}')
+        return sys.exit(f'Program name : {name}\nDescription : {description}Version : {version}')
 
     def PingConnection(self, urls):
 
@@ -112,10 +111,12 @@ class SCChecker():
                         else : print(f'{req.url} Not found')
 
                 else:
+                    for i in arg:
+                        if 'https://' not in i: i = f'https://{i}'
 
-                    req = r.get(arg)
-                    if req.status_code == 200 : print(f'{req.url} is Online')
-                    else : print(f'{req.url} is offline')
+                        req = r.get(i)
+                        if req.status_code == 200 : print(f'{req.url} is Online')
+                        else : print(f'{req.url} is offline')
 
             except Exception as e: sys.exit('Missing domaine')
 
@@ -130,9 +131,9 @@ class SCChecker():
         try:
 
             if arg.info : return self.ProgramInformation()
-            elif arg.inf: return self.UrlParse(arg.inf, 'file')
+            elif arg.inf: return self.UrlParse(arg.inf, mode ='file')
             elif arg.ping: return self.PingConnection(arg.ping)
-            elif arg.urls: return self.UrlParse(arg.urls, 'url')
+            elif arg.urls: return self.UrlParse(arg.urls, mode = 'url')
 
         except Exception as e:sys.exit(e)
         return

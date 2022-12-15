@@ -1,20 +1,20 @@
-# Criminality statistics
+# SC Connectivity
 
 
 ##  Introduction
-[Project Information](#ProjectInformation)<br>
-[Project Description](#ProjecDescription)<br>
+### [Project Information](#ProjectInformation)<br>
+### [Project Description](#ProjecDescription)<br>
 
 
-**Credits**<br>
 
-[Libraries](#libraries)<br>
-[Project Credits](#ProjectCredits)
+
+### [Libraries](#libraries)<br>
+### [Project Credits](#ProjectCredits)
 
 ##  ProjectInformation
 
 **Version**<br>
-
+0.0.1
 
 **Project Start**<br>
 01.12-22
@@ -23,13 +23,18 @@
 31.12-22
 
 ##  Project Description
-The objective of the project is to implement a program to show crime statics.
+the website connectivity checker proviceds a few options through a command-line interface(CLI). 
 
-Python consists of some innovative libraries such as **Pandas**, **MatPlotlib**, which will be a helping hand to build the project.
+###   Commands
+
+- u or --urls allows the user to provide one or more target URLS at the comment line.
+
+- -inf or --inputfile allows the user to supply a file containing a list of urls to check
+
+- -info or --information allows the user to view the program's information 
+
+By default, the application will run the connectivity checks synchronosuly. In other words the app performs the checks one after another. The behavior
 
 ##  Libraries used
 
-  - [Pandas by The Pandas Development Team](https://pandas.pydata.org/)
-  - [Numpy by Numpy team](https://numpy.org/)
-##  Credits
-
+### [argparse]()
