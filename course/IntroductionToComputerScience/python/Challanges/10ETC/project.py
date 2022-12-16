@@ -147,7 +147,6 @@ class SCChecker():
 
         except Exception as e: sys.exit(e)
 
-
 if __name__ == '__main__':
     rp = SCChecker()
     rp.main()
