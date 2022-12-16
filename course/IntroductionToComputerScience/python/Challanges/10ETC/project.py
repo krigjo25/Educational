@@ -1,10 +1,10 @@
-#   Import
+#   Importing Python responsories
 import sys
 import requests as r
 
 #   Importing responsories
 from pythonping import ping
-from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter, ArgumentError
 
 class CommandlineInterface():
     
@@ -15,17 +15,18 @@ class CommandlineInterface():
     def CommandLineOptions(self):
 
         '''Constructing the argparser'''
+        #   Creating a argumentParser
         parser  = ArgumentParser(prog = 'Site Connectivity Checker', formatter_class= ArgumentDefaultsHelpFormatter, description= 'Site Connectivity Checker', epilog= 'by @krigjo25')
 
         #   Initializing command line arguments
-        parser.add_argument('-inf', '--inputfile', dest = 'inf', help =' Enter the path to the file', action = 'append')
-        parser.add_argument('-p', '--ping', dest = 'ping', help ='Ping a website', action = 'append')
-        parser.add_argument('-u', '--urls', dest = 'urls', help ='urls to check', action='append')
-        parser.add_argument('-info', '--information', dest = 'info', help = '%(prog)s Information Center', action='store_true')
+        try :
+            parser.add_argument('-p', '--ping', dest = 'ping', metavar = 'Ping', help ='Ping a website', nargs='+', default=[], type= str)
+            parser.add_argument('-u', '--urls', dest = 'urls', metavar = 'URLs', nargs='+', default=[], type= str, help ='urls to check')
+            parser.add_argument('-info', '--information', dest = 'info', help = '%(prog)s Information Center', action='store_true')
         
         #   Parsing through the arguments
-        arg = parser.parse_args()
-
+            arg = parser.parse_args(sys.argv[1:])
+        except (ArgumentError, Exception) as e: print(e)
         return arg
 
 class SCChecker():
@@ -46,83 +47,93 @@ class SCChecker():
 
         '''
 
-        name = '%(prog)s'
+        name = 'Site Connectivity Checker'
         version = '0.0.1'
 
 
         description = '''Checking connection for websites'''
-        return sys.exit(f'Program name : {name}\nDescription : {description}Version : {version}')
+        return sys.exit(f'Program name : {name}\nDescription : {description}\nVersion : {version}')
 
     def PingConnection(self, urls):
 
-        ''' Ping a internett connection'''
+        ''' 
+        Ping a internett connection
 
-        for i in urls: p = ping(i, verbose=True)
+        #   Ping through a list of websites
+        #   Ping through given links of websites
+        
+        #   Rules
+        #   requires root user
+        '''
+
+        try:
+
+            for i in urls: 
+                
+                if str(i).endswith('.txt'):
+
+                    with open(i, 'r') as f:
+
+                        arg = f.read().split(' ')
+
+                        for i in arg: 
+                            print(f'\nping {i}')
+                            ping(i, verbose=True, interval= 1, timeout=5)
+
+                else:
+                    print(f'Pings {i}')
+                    ping(i, verbose=True, interval= 1, timeout=5)
+
+        except Exception as e: sys.exit(e)
 
         return
 
-    def UrlParse(self, arg, mode, d = ','):
+    def UrlParse(self, arg):
 
         '''
-        
-            #   Read given file
-            #   Loop through the urls
+
+            #   Parse through txt file
+            #   Parse through given links
         
         '''
-
-
         #   Opening up the document
-        if mode == 'file':
+        try :
 
             for i in arg:
 
-                with open(i, 'r') as f:
+                if str(i).endswith('.txt'):
 
-                    try:
+                    with open(i, 'r') as f:
 
-                        arg = f.read()
-                        arg = arg.strip().split(f'{d}')
+
+                        arg = f.read().strip(' ').split(' ')
 
                         #   Iterating through the argument
                         for i in arg:
 
-    #                        if not domaine in i: raise ValueError('Missing domaine')
                             if 'https://' not in i: i = f'https://{i}'.replace(' ', '')
 
-                            req = r.get(i)
-                            if req.status_code == 200: print(f'{req.url} is Online')
-                            else: print(f'{req.url} Not found')
+                            #   Fetch the webpage
+                            req = r.get(i, timeout=5)
 
-                        req.close()
-                    except Exception as e: sys.exit('Missing domaine')
-        else:
+                            if req.status_code == 200: print(f'{req.url} \U0001F44D')
+                            else: print(f'{req.url} is \U0001F4F4')
 
-            try:
-
-                if len(arg) > 1:
-
-                    #   Fetch webpage
-                    for i in arg:
-
-                        #   Send a request to the page
-                        req = r.get(i)
-
-                        if req.status_code == 200: print(f'{req.url} is online')
-                        else : print(f'{req.url} Not found')
+                            req.close()
 
                 else:
-                    for i in arg:
-                        if 'https://' not in i: i = f'https://{i}'
 
-                        req = r.get(i)
-                        if req.status_code == 200 : print(f'{req.url} is Online')
-                        else : print(f'{req.url} is offline')
+                    if 'https://' not in i: i = f'https://{i}'.replace(' ', '')
 
-            except Exception as e: sys.exit('Missing domaine')
+                    #   Fetch the webpage
+                    req = r.get(i, timeout=5)
+                    if req.status_code == 200: print(f'{req.url} \U0001F44D')
+                    else: print(f'{req.url} \U0001F4F4')
 
-            #   Close the request
-            req.close()
-        return
+                    req.close()
+        
+        except Exception as e: 
+            print(f'{i} \U0001F4F4')
 
     def main(self):
 
@@ -131,12 +142,11 @@ class SCChecker():
         try:
 
             if arg.info : return self.ProgramInformation()
-            elif arg.inf: return self.UrlParse(arg.inf, mode ='file')
             elif arg.ping: return self.PingConnection(arg.ping)
-            elif arg.urls: return self.UrlParse(arg.urls, mode = 'url')
+            elif arg.urls: return self.UrlParse(arg.urls)
 
-        except Exception as e:sys.exit(e)
-        return
+        except Exception as e: sys.exit(e)
+
 
 if __name__ == '__main__':
     rp = SCChecker()
