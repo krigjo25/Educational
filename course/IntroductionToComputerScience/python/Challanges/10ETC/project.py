@@ -16,17 +16,20 @@ class CommandlineInterface():
 
         '''Constructing the argparser'''
         #   Creating a argumentParser
+
         parser  = ArgumentParser(prog = 'Site Connectivity Checker', formatter_class= ArgumentDefaultsHelpFormatter, description= 'Site Connectivity Checker', epilog= 'by @krigjo25')
 
         #   Initializing command line arguments
+
         try :
             parser.add_argument('-p', '--ping', dest = 'ping', metavar = 'Ping', help ='Ping a website', nargs='+', default=[], type= str)
-            parser.add_argument('-u', '--urls', dest = 'urls', metavar = 'URLs', nargs='+', default=[], type= str, help ='urls to check')
+            parser.add_argument('-u', '--urls', dest = 'urls', metavar = 'URLs', nargs='+', default=[], type= str, help ='Urls to check, input one or more links or a textfile')
             parser.add_argument('-info', '--information', dest = 'info', help = '%(prog)s Information Center', action='store_true')
         
         #   Parsing through the arguments
             arg = parser.parse_args(sys.argv[1:])
         except (ArgumentError, Exception) as e: print(e)
+
         return arg
 
 class SCChecker():
@@ -84,7 +87,7 @@ class SCChecker():
                     print(f'Pings {i}')
                     ping(i, verbose=True, interval= 1, timeout=5)
 
-        except Exception as e: sys.exit(e)
+        except Exception as e: print(e)
 
         return
 
@@ -104,7 +107,6 @@ class SCChecker():
                 if str(i).endswith('.txt'):
 
                     with open(i, 'r') as f:
-
 
                         arg = f.read().strip(' ').split(' ')
 
