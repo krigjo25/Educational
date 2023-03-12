@@ -1,0 +1,6 @@
+ Diffrence between (W)riting and (A)ppend mode is 
+W - mode : 
+ Truncate file to zero length or create a text filewriting. The stream is positioned at the beginning of the file.file if the same name does not exist 
+
+A - mode. : 
+ Open for writing. The file is created if it DoesNot exist. The stream is positioned at the end of the file.  Subsequent write to the file will always end up at the then current end of the file, irrespective of any intervening fseek(3) or similar
